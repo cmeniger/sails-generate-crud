@@ -1,0 +1,31 @@
+<div class="row section-<%= styleClass %>">
+    <h1>
+        <%= viewTitle %> : Create
+    </h1>
+    <div class="small button-group round">
+        <a href="<_%= path('home') %_>" class="button secondary"><i class="fa fa-fw fa-home"></i> Home</a>
+        <a href="<_%= path('<%= routeName %>_index') %_>" class="button secondary"><i class="fa fa-fw fa-chevron-left"></i> Back</a>
+    </div>
+    <div class="content-create">
+        <form action="<_%= path('<%= routeName %>_create_post') %_>" method="post">
+            <div class="row">
+                <div class="columns medium-6 medium-centered">
+                    <fieldset class="fieldset">
+                        <legend>Data</legend>
+                        <label>Name
+                            <input type="text" name="name" value=""/>
+                        </label>
+                        <label>Description
+                            <textarea name="description"></textarea>
+                        </label>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row gutter-margin-top">
+                <div class="columns small-3 small-centered">
+                    <input type="submit" class="button round fullwidth" value="Submit"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,159 @@
+/**
+ * <%= controllerPath %>/<%= controllerName %>Controller
+ *
+ * @description :: Server-side logic for managing <%= controllerPath %>/<%= controllerName %>
+ * @help        :: See http://sailsjs.com/documentation/concepts/controllers
+ */
+
+module.exports = {
+    /**
+     * index
+     * @param req
+     * @param res
+     * @param next
+     */
+    index:      function (req, res, next)
+                {
+                    // Pagination
+                    var pagerPage = req.query.pager_page ? req.query.pager_page : sails.config.pagination.front.page;
+                    var pagerLeft = req.query.pager_left ? req.query.pager_left : sails.config.pagination.front.left;
+                    var pagerRight = req.query.pager_right ? req.query.pager_right : sails.config.pagination.front.right;
+                    var pagerCurrent = req.query.pager_current ? req.query.pager_current : 1;
+                    // Render
+                    sails.pager.paginate(<%= document %>, {}, pagerCurrent, pagerPage, [], 'createdAt DESC', function (err, paginate)
+                    {
+                        if(err)
+                        {
+                            return next(err);
+                        }
+                        return res.view('<%= viewFront %>/index', {
+                            documents:  paginate.data,
+                            pagination: Object.assign(paginate.meta, {left: pagerLeft, right: pagerRight, route: '/<%= route %>'})
+                        });
+                    });
+                },
+    /**
+     * create form
+     * @param req
+     * @param res
+     */
+    create:     function (req, res)
+                {
+                    return res.notFound(); // Delete this line for activate the route
+                    res.view('<%= viewFront %>/create');
+                },
+    /**
+     * create post
+     * @param req
+     * @param res
+     * @param next
+     */
+    createPost: function (req, res, next)
+                {
+                    return res.notFound(); // Delete this line for activate the route
+                    var params = req.params.all();
+                    <%= document %>.create(params, function (err, document)
+                    {
+                        if(err)
+                        {
+                            return next(err);
+                        }
+                        res.redirect('/<%= route %>/detail/' + document.id);
+                    });
+                },
+    /**
+     * update form
+     * @param req
+     * @param res
+     */
+    update:     function (req, res)
+                {
+                    return res.notFound(); // Delete this line for activate the route
+                    <%= document %>.findOne(req.param('id'), function (err, document)
+                    {
+                        if(err)
+                        {
+                            return next(err);
+                        }
+                        if(!document)
+                        {
+                            res.notFound();
+                        }
+                        res.view('<%= viewFront %>/update', {
+                            document: document
+                        });
+                    });
+                },
+    /**
+     * update post
+     * @param req
+     * @param res
+     * @param next
+     */
+    updatePost: function (req, res, next)
+                {
+                    return res.notFound(); // Delete this line for activate the route
+                    var params = req.params.all();
+                    var id = req.param('id');
+                    <%= document %>.update(id, params, function (err)
+                    {
+                        if(err)
+                        {
+                            res.redirect('/<%= route %>/update/' + id);
+                        }
+                        res.redirect('/<%= route %>/detail/' + id);
+                    });
+                },
+    /**
+     * detail
+     * @param req
+     * @param res
+     * @param next
+     */
+    detail:     function (req, res, next)
+                {
+                    <%= document %>.findOne(req.param('id'), function (err, document)
+                    {
+                        if(err)
+                        {
+                            return next(err);
+                        }
+                        if(!document)
+                        {
+                            res.notFound();
+                        }
+                        res.view('<%= viewFront %>/detail', {
+                            document: document
+                        });
+                    });
+                },
+    /**
+     * Delete from database
+     * @param req
+     * @param res
+     * @param next
+     */
+    destroy:    function (req, res, next)
+                {
+                    return res.notFound(); // Delete this line for activate the route
+                    <%= document %>.findOne({id: req.param('id')}, function (err, document)
+                    {
+                        if(err)
+                        {
+                            next(err);
+                        }
+                        if(!document)
+                        {
+                            res.notFound();
+                        }
+                        <%= document %>.destroy(document.id, function (err)
+                        {
+                            if(err)
+                            {
+                                next(err);
+                            }
+                        });
+                        res.redirect('/<%= route %>');
+                    });
+                }
+};

@@ -1,0 +1,30 @@
+<div class="row section-<%= styleClass %>">
+    <h1>
+        <%= viewTitle %>
+    </h1>
+    <div class="small button-group">
+        <a href="<_%= path('home') %_>" class="button secondary round"><i class="fa fa-fw fa-home"></i> Home</a>
+    </div>
+    <div class="content-index" id="content-index">
+        <div class="row small-up-2 medium-up-3 large-up-4">
+            <_% _.each(documents, function (document) { %_>
+            <div class="column column-block">
+                <div class="card hvr-grow">
+                    <div class="card-divider">
+                        <_%= document.name %_>
+                    </div>
+                    <div class="card-section">
+                        <p><_%= document.description %_></p>
+                    </div>
+                    <div class="card-section">
+                        <ul class="menu">
+                            <li><a href="<_%= path('<%= routeName %>_detail', {id:document.id}) %_>"><i class="fa fa-search"></i> <span>detail</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <_% }); %_>
+        </div>
+        <_%- partial('<%= viewPartial %>_partials/pagination.ejs') %_>
+    </div>
+</div>

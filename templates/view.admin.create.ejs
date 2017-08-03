@@ -1,0 +1,48 @@
+<div class="row section-<%= styleClass %>">
+    <div class="panel">
+        <div class="float-left">
+            <h1>
+                <i class="fa fa-cube"></i> <%= viewTitle %> : <_%= __('Create') %_>
+            </h1>
+            <nav aria-label="You are here:" role="navigation">
+                <ul class="breadcrumbs">
+                    <li><a href="<_%= path('home') %_>">Home</a></li>
+                    <li><a href="<_%= path('admin') %_>">Admin</a></li>
+                    <% if(parent !== '') { %>
+                    <li><a href="<_%= path('admin_<%= routeParent %>_index') %_>"><%= viewBreadcrumbParent %></a></li>
+                    <% } %>
+                    <li><a href="<_%= path('admin_<%= routeName %>_index') %_>"><%= viewBreadcrumb %></a></li>
+                    <li>
+                        <span class="show-for-sr"><_%= __('Current') %_>: </span> <_%= __('Create') %_>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="float-right">
+            <_%- partial('<%= viewPartial %>_partials/admin.actions.header.ejs', {bundle: '<%= routeName %>', back: true}) %_>
+            <div class="counter-index">
+                <_%= __('Recordings') %_> <span><_%= modelCount('<%= modelName %>') %_></span>
+            </div>
+        </div>
+    </div>
+    <div class="content-create">
+        <div class="panel">
+            <form action="<_%= path('admin_<%= routeName %>_create_post') %_>" method="post">
+                <div class="row">
+                    <div class="columns medium-6 medium-centered">
+                        <fieldset class="fieldset">
+                            <legend><_%= __('Data') %_></legend>
+                            <label><_%= __('Name') %_> <input type="text" name="name" value=""/> </label>
+                            <label><_%= __('Description') %_> <textarea name="description"></textarea> </label>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row gutter-margin-top">
+                    <div class="columns small-3 small-centered">
+                        <input type="submit" class="button round fullwidth" value="<_%= __('Submit') %_>"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

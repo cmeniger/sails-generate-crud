@@ -1,0 +1,18 @@
+{
+  "<%= menuId %>": {
+    "parent": "<%= menuParent %>",
+    "order": 99,
+    "name": "<%= menuName %>",
+    "icon": "fa-cube",
+    "display": <%= menuParent === '' ? true : false %>,
+    "sons": [],
+    "links": [
+      {
+        "name": "<%= menuName %>s",
+        "icon": "fa-bars",
+        "url": "admin_<%= routeName %>_index",
+        "count": "<%= modelName %>"
+      }
+    ]
+  }
+}

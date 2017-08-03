@@ -1,0 +1,79 @@
+<div class="row section-<%= styleClass %>">
+    <div class="panel">
+        <div class="float-left">
+            <h1>
+                <i class="fa fa-cube"></i> <%= viewTitle %> : <_%= document.name %_>
+            </h1>
+            <nav aria-label="You are here:" role="navigation">
+                <ul class="breadcrumbs">
+                    <li><a href="<_%= path('home') %_>">Home</a></li>
+                    <li><a href="<_%= path('admin') %_>">Admin</a></li>
+                    <% if(parent !== '') { %>
+                    <li><a href="<_%= path('admin_<%= routeParent %>_index') %_>"><%= viewBreadcrumbParent %></a></li>
+                    <% } %>
+                    <li><a href="<_%= path('admin_<%= routeName %>_index') %_>"><%= viewBreadcrumb %></a></li>
+                    <li>
+                        <span class="show-for-sr"><_%= __('Current') %_>: </span> <_%= document.name %_>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="float-right">
+            <_%- partial('<%= viewPartial %>_partials/admin.actions.header.ejs', {bundle: '<%= routeName %>', back: true, id: document.id}) %_>
+            <div class="counter-index">
+                <_%= __('Recordings') %_> <span><_%= modelCount('<%= modelName %>') %_></span>
+            </div>
+        </div>
+    </div>
+    <div class="content-detail">
+        <div class="panel">
+            <fieldset class="fieldset">
+                <legend><_%= __('Data') %_></legend>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <_%= __('ID') %_>
+                            </td>
+                            <td>
+                                <_%= document.id %_>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <_%= __('Created') %_>
+                            </td>
+                            <td>
+                                <_%= sails.moment(document.createdAt).locale(req.locale).format('L LT') %_>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <_%= __('Updated') %_>
+                            </td>
+                            <td>
+                                <_%= sails.moment(document.updatedAt).locale(req.locale).format('L LT') %_>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <_%= __('Name') %_>
+                            </td>
+                            <td>
+                                <_%= document.name %_>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <_%= __('Description') %_>
+                            </td>
+                            <td>
+                                <_%= document.description %_>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+</div>

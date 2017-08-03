@@ -1,0 +1,53 @@
+<div class="row section-<%= styleClass %>">
+    <div class="panel">
+        <div class="float-left">
+            <h1>
+                <i class="fa fa-cube"></i> <%= viewTitle %>
+            </h1>
+            <nav aria-label="You are here:" role="navigation">
+                <ul class="breadcrumbs">
+                    <li><a href="<_%= path('home') %_>">Home</a></li>
+                    <li><a href="<_%= path('admin') %_>">Admin</a></li>
+                    <% if(parent !== '') { %>
+                    <li><a href="<_%= path('admin_<%= routeParent %>_index') %_>"><%= viewBreadcrumbParent %></a></li>
+                    <% } %>
+                    <li>
+                        <span class="show-for-sr"><_%= __('Current') %_>: </span> <%= viewBreadcrumb %>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="float-right">
+            <_%- partial('<%= viewPartial %>_partials/admin.actions.header.ejs', {bundle: '<%= routeName %>'}) %_>
+            <div class="counter-index">
+                <_%= __('Recordings') %_> <span><_%= modelCount('<%= modelName %>') %_></span>
+            </div>
+        </div>
+    </div>
+    <div class="content-index" id="content-index">
+        <_%- partial('<%= viewPartial %>_partials/pagination.ejs', {style: 'panel'}) %_>
+        <div class="panel">
+            <table class="stack">
+                <thead>
+                    <tr>
+                        <th><_%= __('ID') %_><_%- partial('<%= viewPartial %>_partials/pagination.sort.ejs', {field: 'id'}) %_></th>
+                        <th><_%= __('Date') %_><_%- partial('<%= viewPartial %>_partials/pagination.sort.ejs', {field: 'createdAt'}) %_></th>
+                        <th><_%= __('Name') %_><_%- partial('<%= viewPartial %>_partials/pagination.sort.ejs', {field: 'name'}) %_></th>
+                        <th><_%= __('Actions') %_></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <_% _.each(documents, function (document) { %_>
+                    <tr data-id="<_%= document.id %_>" data-model="document">
+                        <td><_%= document.id %_></td>
+                        <td><_%= sails.moment(document.createdAt).locale(req.locale).format('L LT') %_></td>
+                        <td><_%= document.name %_></td>
+                        <td><_%- partial('<%= viewPartial %>_partials/admin.actions.index.ejs', {bundle: '<%= routeName %>', document: document}) %_></td>
+                    </tr>
+                    <_% }); %_>
+                </tbody>
+            </table>
+        </div>
+        <_%- partial('<%= viewPartial %>_partials/pagination.ejs', {style: 'panel'}) %_>
+    </div>
+</div>

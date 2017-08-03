@@ -1,0 +1,19 @@
+/**
+ * <%= modelPath %>/<%= modelName %>
+ *
+ * @description :: Model <%= modelPath %>/<%= modelName %>
+ * @help        :: See http://sailsjs.com/documentation/concepts/models-and-orm/models
+ */
+module.exports = {
+    autoCreatedAt: true,
+    attributes:    {
+        name:        {
+            type:     'string',
+            required: true,
+            unique:   true
+        },
+        description: {
+            type: 'string'
+        }
+    }
+};

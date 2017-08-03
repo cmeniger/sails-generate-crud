@@ -1,0 +1,16 @@
+<div class="row section-<%= styleClass %>">
+    <h1>
+        <_%= document.name %_>
+    </h1>
+    <div class="small button-group round">
+        <a href="<_%= path('home') %_>" class="button secondary"><i class="fa fa-fw fa-home"></i> Home</a>
+        <a href="<_%= path('<%= routeName %>_index') %_>" class="button secondary"><i class="fa fa-fw fa-chevron-left"></i> Back</a>
+    </div>
+    <div class="content-detail">
+        <div class="media-object">
+            <div class="media-object-section main-section">
+                <p><_%= document.description %_></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+/**
+ * <%= routerName %>
+ *
+ * @description :: Routing <%= routerName %>
+ * @help        :: See http://sailsjs.com/documentation/concepts/routes
+ */
+
+module.exports.routes = {
+    /**************************************************************************
+     * ADMIN
+     */
+    'get /admin/<%= route %>':             {
+        name:       'admin_<%= routeName %>_index',
+        controller: '<%= controllerPath %>/Admin/<%= controllerName %>Controller',
+        action:     'index',
+        locals:     {
+            layout: '_layouts/layout.admin'
+        }
+    },
+    'get /admin/<%= route %>/create':      {
+        name:       'admin_<%= routeName %>_create',
+        controller: '<%= controllerPath %>/Admin/<%= controllerName %>Controller',
+        action:     'create',
+        locals:     {
+            layout: '_layouts/layout.admin'
+        }
+    },
+    'post /admin/<%= route %>/create':     {
+        name:       'admin_<%= routeName %>_create_post',
+        controller: '<%= controllerPath %>/Admin/<%= controllerName %>Controller',
+        action:     'createPost',
+        locals:     {
+            layout: '_layouts/layout.admin'
+        }
+    },
+    'get /admin/<%= route %>/update/:id':  {
+        name:       'admin_<%= routeName %>_update',
+        controller: '<%= controllerPath %>/Admin/<%= controllerName %>Controller',
+        action:     'update',
+        locals:     {
+            layout: '_layouts/layout.admin'
+        }
+    },
+    'post /admin/<%= route %>/update/:id': {
+        name:       'admin_<%= routeName %>_update_post',
+        controller: '<%= controllerPath %>/Admin/<%= controllerName %>Controller',
+        action:     'updatePost',
+        locals:     {
+            layout: '_layouts/layout.admin'
+        }
+    },
+    'get /admin/<%= route %>/detail/:id':  {
+        name:       'admin_<%= routeName %>_detail',
+        controller: '<%= controllerPath %>/Admin/<%= controllerName %>Controller',
+        action:     'detail',
+        locals:     {
+            layout: '_layouts/layout.admin'
+        }
+    },
+    'post /admin/<%= route %>/destroy/:id': {
+        name:       'admin_<%= routeName %>_destroy',
+        controller: '<%= controllerPath %>/Admin/<%= controllerName %>Controller',
+        action:     'destroy',
+        locals:     {
+            layout: '_layouts/layout.admin'
+        }
+    },
+    /**************************************************************************
+     * FRONT
+     */
+    'get /<%= route %>':                   {
+        name:       '<%= routeName %>_index',
+        controller: '<%= controllerPath %>/<%= controllerName %>Controller',
+        action:     'index'
+    },
+    'get /<%= route %>/create':            {
+        name:       '<%= routeName %>_create',
+        controller: '<%= controllerPath %>/<%= controllerName %>Controller',
+        action:     'create'
+    },
+    'post /<%= route %>/create':           {
+        name:       '<%= routeName %>_create_post',
+        controller: '<%= controllerPath %>/<%= controllerName %>Controller',
+        action:     'createPost'
+    },
+    'get /<%= route %>/update/:id':        {
+        name:       '<%= routeName %>_update',
+        controller: '<%= controllerPath %>/<%= controllerName %>Controller',
+        action:     'update'
+    },
+    'post /<%= route %>/update/:id':       {
+        name:       '<%= routeName %>_update_post',
+        controller: '<%= controllerPath %>/<%= controllerName %>Controller',
+        action:     'updatePost'
+    },
+    'get /<%= route %>/detail/:id':        {
+        name:       '<%= routeName %>_detail',
+        controller: '<%= controllerPath %>/<%= controllerName %>Controller',
+        action:     'detail'
+    },
+    'post /<%= route %>/destroy/:id':       {
+        name:       '<%= routeName %>_destroy',
+        controller: '<%= controllerPath %>/<%= controllerName %>Controller',
+        action:     'destroy'
+    }
+};
+
